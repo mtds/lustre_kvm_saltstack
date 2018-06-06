@@ -265,8 +265,7 @@ The SaltStack file for the client will took care to create a proper LNET configu
 Mount the filesystem:
 ```bash
 >>> vm ex lxb001 -r 'mount -t lustre lxmds01@tcp0:/testfs /lustre/testfs'
->>> mount
-[...]
+>>> vm ex lxb001 -r 'mount -t lustre'
 10.1.1.47@tcp:/testfs on /lustre/testfs type lustre (rw,seclabel,lazystatfs)
 ```
 
