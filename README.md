@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The following tutorial aim to show how to create a small virtualized environment (based on Libvirt/KVM) to deploy a [Lustre filesystem](https://wiki.hpdd.intel.com/display/PUB/HPDD+Wiki+Front+Page), with the help of **SaltStack**. More info about Lustre can be found in the 'Lustre Resources' section at the end of this document (in this document it is assumed that you already have a basic knowledge of Lustre and its components).
+The following tutorial aim to show how to create a small virtualized environment (based on Libvirt/KVM) to deploy a [Lustre filesystem](https://wiki.hpdd.intel.com/display/PUB/HPDD+Wiki+Front+Page), with the help of **SaltStack**. More info about Lustre can be found in the 'Lustre Resources' section at the end of this document (it is assumed that you already have a basic knowledge of Lustre and its components).
 
 ## Prerequisites
 
