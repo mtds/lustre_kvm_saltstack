@@ -202,6 +202,15 @@ Create and format the MGS/MDT file system:
 /dev/vdb on /lustre/testfs/mdt type lustre (ro,context=system_u:object_r:tmp_t:s0)
 ```
 
+Firewall issues:
+```bash
+# Enable traffic from the OSSs:
+>>> vm ex lxmds01 -r 'firewall-cmd --zone=public --add-source=10.10.1.32'
+>>> vm ex lxmds01 -r 'firewall-cmd --zone=public --add-source=10.10.1.33'
+# Enable traffic from the client:
+>>> vm ex lxmds01 -r 'firewall-cmd --zone=public --add-source=10.10.1.13'
+```
+
 ### OSS
 
 Configure `lxfs0[1,2]` with:
@@ -233,6 +242,18 @@ Create and format the OSTs:
 /dev/vdb on /lustre/OST type lustre (ro,context=system_u:object_r:tmp_t:s0)
 ```
 
+Firewall issues:
+```bash
+# Enable traffic from OSS and MDS:
+>>> vm ex lxfs01 -r 'firewall-cmd --zone=public --add-source=10.10.1.47'
+>>> vm ex lxfs01 -r 'firewall-cmd --zone=public --add-source=10.10.1.33'
+>>> vm ex lxfs02 -r 'firewall-cmd --zone=public --add-source=10.10.1.47'
+>>> vm ex lxfs02 -r 'firewall-cmd --zone=public --add-source=10.10.1.32'
+# Enable traffic from the client:
+>>> vm ex lxfs01 -r 'firewall-cmd --zone=public --add-source=10.10.1.13'
+>>> vm ex lxfs02 -r 'firewall-cmd --zone=public --add-source=10.10.1.13'
+```
+
 *NOTE*: increase the ``--index`` parameter consistently whenever you add a new OST on additional OSS otherwise the size of the entire Lustre FS will not be the sum of all the OSTs available.
 
 ### Client
@@ -262,6 +283,13 @@ libcfs                415815  12 fid,fld,lmv,mdc,lov,mgc,osc,lnet,lustre,obdclas
 
 The SaltStack file for the client will took care to create a proper LNET configuration file under: ``/etc/modprobe.d/lnet.conf``.
 
+Firewall issues:
+```bash
+>>> vm ex lxb001 -r 'firewall-cmd --zone=public --add-source=10.10.1.47'
+>>> vm ex lxb001 -r 'firewall-cmd --zone=public --add-source=10.10.1.32'
+>>> vm ex lxb001 -r 'firewall-cmd --zone=public --add-source=10.10.1.33'
+```
+
 Mount the filesystem:
 ```bash
 >>> vm ex lxb001 -r 'mount -t lustre lxmds01@tcp0:/testfs /lustre/testfs'
@@ -269,6 +297,11 @@ Mount the filesystem:
 10.1.1.47@tcp:/testfs on /lustre/testfs type lustre (rw,seclabel,lazystatfs)
 ```
 
+In case the ``mount`` operation did not succeed, it is higly likely there's a firewall and/or a network issue. In this case, ``dmesg -kT`` on the Lustre client reports something similar to the following error message:
+```
+[...]
+[Tue Jun  5 17:20:02 2018] Lustre: 883:0:(client.c:2114:ptlrpc_expire_one_request()) @@@ Request sent has failed due to network error: [sent 1528211990/real 1528211990]  req@ffff880034da8000 x1600707912823280/t0(0) o250->MGC10.1.1.47@tcp@10.1.1.47@tcp:26/25 lens 520/544 e 0 to 1 dl 1528211995 ref 1 fl Rpc:eXN/0/ffffffff rc 0/-1
+```
 
 ## I/O Test
 
