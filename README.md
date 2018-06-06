@@ -89,7 +89,7 @@ NODES=lxcm01,lxmds01,lxfs0[1,2],lxb001
 ```bash
 # start new VM instances using `centos7` as source image
 >>> vn s centos7
-# clean up everything and start from scratch (only if you don't need this VMs anymore).
+# clean up everything and start from scratch (only if you don't need these VMs anymore).
 >>> vn r
 ```
 
@@ -197,6 +197,9 @@ Create and format the MGS/MDT file system:
 >>> vm ex lxcm01 -r 'salt lxmds01* cmd.run mkfs.lustre --reformat --fsname=testfs --mdt --mgs /dev/vdb'
 # Mount the filesystem
 >>> vm ex lxcm01 -r 'salt lxmds01* cmd.run mount -t lustre /dev/vdb /lustre/testfs/mdt'
+# Show mount info
+>>> vm ex lxmds01 -r 'mount -t lustre'
+/dev/vdb on /lustre/testfs/mdt type lustre (ro,context=system_u:object_r:tmp_t:s0)
 ```
 
 ### OSS
@@ -225,6 +228,9 @@ Create and format the OSTs:
 >>>  vm ex lxcm01 -r 'salt lxfs02* cmd.run mkfs.lustre --reformat --fsname=testfs --ost --index=1 --mgsnode=lxmds01@tcp0 /dev/vdb'
 # Mount the OSTs
 >>> vm ex lxcm01 -r 'salt lxfs0* cmd.run mount -t lustre /dev/vdb /lustre/OST'
+# Show mount info
+>>> vm ex lxfs01 -r 'mount -t lustre'
+/dev/vdb on /lustre/OST type lustre (ro,context=system_u:object_r:tmp_t:s0)
 ```
 
 *NOTE*: increase the ``--index`` parameter consistently whenever you add a new OST on additional OSS otherwise the size of the entire Lustre FS will not be the sum of all the OSTs available.
@@ -255,6 +261,14 @@ libcfs                415815  12 fid,fld,lmv,mdc,lov,mgc,osc,lnet,lustre,obdclas
 ```
 
 The SaltStack file for the client will took care to create a proper LNET configuration file under: ``/etc/modprobe.d/lnet.conf``.
+
+Mount the filesystem:
+```bash
+>>> vm ex lxb001 -r 'mount -t lustre lxmds01@tcp0:/testfs /lustre/testfs'
+>>> mount
+[...]
+10.1.1.47@tcp:/testfs on /lustre/testfs type lustre (rw,seclabel,lazystatfs)
+```
 
 
 ## I/O Test
