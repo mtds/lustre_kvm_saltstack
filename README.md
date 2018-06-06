@@ -209,6 +209,8 @@ Firewall issues:
 >>> vm ex lxmds01 -r 'firewall-cmd --zone=public --add-source=10.10.1.33'
 # Enable traffic from the client:
 >>> vm ex lxmds01 -r 'firewall-cmd --zone=public --add-source=10.10.1.13'
+# Apply FW rules permanently:
+>>> vm ex lxmds01 -r 'firewall-cmd --runtime-to-permanent'
 ```
 
 ### OSS
@@ -252,6 +254,9 @@ Firewall issues:
 # Enable traffic from the client:
 >>> vm ex lxfs01 -r 'firewall-cmd --zone=public --add-source=10.10.1.13'
 >>> vm ex lxfs02 -r 'firewall-cmd --zone=public --add-source=10.10.1.13'
+# Apply FW rules permanently:
+>>> vm ex lxfs01 -r 'firewall-cmd --runtime-to-permanent'
+>>> vm ex lxfs02 -r 'firewall-cmd --runtime-to-permanent'
 ```
 
 *NOTE*: increase the ``--index`` parameter consistently whenever you add a new OST on additional OSS otherwise the size of the entire Lustre FS will not be the sum of all the OSTs available.
@@ -288,6 +293,8 @@ Firewall issues:
 >>> vm ex lxb001 -r 'firewall-cmd --zone=public --add-source=10.10.1.47'
 >>> vm ex lxb001 -r 'firewall-cmd --zone=public --add-source=10.10.1.32'
 >>> vm ex lxb001 -r 'firewall-cmd --zone=public --add-source=10.10.1.33'
+# Apply FW rules permanently:
+>>> vm ex lxb001 -r 'firewall-cmd --runtime-to-permanent'
 ```
 
 Mount the filesystem:
