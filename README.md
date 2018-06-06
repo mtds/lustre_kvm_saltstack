@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The following tutorial aim to show how to create a small virtualized environment (based on Libvirt/KVM) to deploy a [Lustre filesystem](https://wiki.hpdd.intel.com/display/PUB/HPDD+Wiki+Front+Page).More info about Lustre can be found in the 'Lustre Resources' section at the end of this document.
+The following tutorial aim to show how to create a small virtualized environment (based on Libvirt/KVM) to deploy a [Lustre filesystem](https://wiki.hpdd.intel.com/display/PUB/HPDD+Wiki+Front+Page), with the help of **SaltStack**. More info about Lustre can be found in the 'Lustre Resources' section at the end of this document (in this document it is assumed that you already have a basic knowledge of Lustre and its components).
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ The following command will be used to create a VM which will serve as a base for
 >>> virt-install --name centos7 --ram 2048 --os-type linux --virt-type kvm --network bridge=nbr0 \
             --disk path=disk.img,size=15,format=qcow2,sparse=true,bus=virtio \
             --disk path=disk1.img,size=2,format=qcow2,sparse=true,bus=virtio \
-	    --location http://mirror.centos.org/centos-7/7/os/x86_64/ --graphics none --console pty,target_type=serial \
+            --location http://mirror.centos.org/centos-7/7/os/x86_64/ --graphics none --console pty,target_type=serial \
             --noreboot --initrd-inject=$VM_TOOLS/var/centos/7/kickstart.cfg --extra-args 'console=ttyS0,115200n8 serial inst.repo=http://mirror.centos.org/centos-7/7/os/x86_64/ inst.text inst.ks=file:/kickstart.cfg'
 ```
 
