@@ -310,9 +310,9 @@ In case the ``mount`` operation did not succeed, it is higly likely there's a fi
 [Tue Jun  5 17:20:02 2018] Lustre: 883:0:(client.c:2114:ptlrpc_expire_one_request()) @@@ Request sent has failed due to network error: [sent 1528211990/real 1528211990]  req@ffff880034da8000 x1600707912823280/t0(0) o250->MGC10.1.1.47@tcp@10.1.1.47@tcp:26/25 lens 520/544 e 0 to 1 dl 1528211995 ref 1 fl Rpc:eXN/0/ffffffff rc 0/-1
 ```
 
-Shows Lustre disk space usage:
+Shows Lustre disk space usage (unprivileged users can also run this command):
 ```bash
->>> lfs df -h
+>>> vm ex lxb001 'lfs df -h'
 UUID                       bytes        Used   Available Use% Mounted on
 testfs-MDT0000_UUID         1.1G        7.2M        1.0G   1% /lustre/testfs[MDT:0]
 testfs-OST0000_UUID         1.8G       25.2M        1.7G   1% /lustre/testfs[OST:0]
