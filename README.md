@@ -339,6 +339,7 @@ Official documentation from the **Lustre and Intel Wiki pages**:
 * [Putting together a Lustre FS](https://wiki.hpdd.intel.com/display/PUB/Putting+together+a+Lustre+filesystem)
 * [Components of a Lustre FS (MDT,MGS,OSS,OST,etc.)](https://wiki.hpdd.intel.com/display/PUB/Components+of+a+Lustre+filesystem)
 * [Lustre Networking overview](http://wiki.lustre.org/Lustre_Networking_(LNET)_Overview)
+* [Lustre Benchmarking](http://wiki.lustre.org/Category:Benchmarking)
 * [Lustre deployment on KVM](http://wiki.lustre.org/KVM_Quick_Start_Guide)
 * [Lustre deployment with Vagrant/Virtualbox](http://wiki.lustre.org/Create_a_Virtual_HPC_Storage_Cluster_with_Vagrant)
 * [Managing Lustre as an HA service](http://wiki.lustre.org/Managing_Lustre_as_a_High_Availability_Service)
