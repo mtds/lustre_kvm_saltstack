@@ -42,7 +42,7 @@ Future version of this document will possibly include:
 
 ## Create a CentOS VM
 
-The following code section shows how to create a VM which will serve as a base for creating all the other nodes. Note that *two* disks in QCOW2 format will be created, one for the OS and the second one which will be used by the MDS and the OSS nodes.
+The following code section shows how to create a VM image which will serve as a base for creating all the other nodes. Note that *two* disks in QCOW2 format will be created, one for the OS and the second one which will be used by the MDS and the OSS nodes.
 
 ```bash
 # Create directory for centos7 image and change the directory path:
