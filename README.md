@@ -45,6 +45,10 @@ Future version of this document will possibly include:
 The following command will be used to create a VM which will serve as a base for creating all the other nodes. Note that *two* disks in QCOW2 format will be created, one for the OS and the second one which will be used by the MDS and the OSS nodes.
 
 ```bash
+# Create directory for centos7 image and change the directory path:
+>>> mkdir -p $VM_IMAGE_PATH/centos7 && cd $VM_IMAGE_PATH/centos7
+
+# Install the image in the proper directory:
 >>> virt-install --name centos7 --ram 2048 --os-type linux --virt-type kvm --network bridge=nbr0 \
             --disk path=disk.img,size=15,format=qcow2,sparse=true,bus=virtio \
             --disk path=disk1.img,size=2,format=qcow2,sparse=true,bus=virtio \
@@ -52,7 +56,7 @@ The following command will be used to create a VM which will serve as a base for
             --noreboot --initrd-inject=$VM_TOOLS/var/centos/7/kickstart.cfg --extra-args 'console=ttyS0,115200n8 serial inst.repo=http://mirror.centos.org/centos-7/7/os/x86_64/ inst.text inst.ks=file:/kickstart.cfg'
 ```
 
-For more details about this operation, please refer to the ['Image'](https://github.com/vpenso/vm-tools/blob/master/docs/image.md) documentation of the **vm-tools**.
+For more details about installing and configuring a virtual maschine image, please refer to the ['Image'](https://github.com/vpenso/vm-tools/blob/master/docs/image.md) documentation of the **vm-tools**.
 
 Once the VM is up and running, include the [SaltStack package repository][spr] into the **centos7** virtual machine:
 
